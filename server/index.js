@@ -3,6 +3,7 @@ const session = require('express-session')
 const massive = require('massive')
 
 const express = require('express')
+const userCtrl = require('./controllers/user')
 
 let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 
@@ -28,6 +29,12 @@ app.use(
         cookie: {maxAge: 1000 * 60 * 60 * 5}
     })
 )
+
+//AUTH ENDPOINTS!!
+app.post('/api/auth/register', userCtrl.register)
+app.post('/api/auth/login', userCtrl.login)
+app.get('/api/auth/me', userCtrl.getUser)
+app.post('/api/auth/logout', userCtrl.logout)
 
 
 app.listen(SERVER_PORT, () => {
