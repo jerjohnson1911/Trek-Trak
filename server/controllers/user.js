@@ -43,5 +43,12 @@ module.exports = {
     logout: (req, res) => {
         req.session.destroy()
         return res.sendStatus(200)
+    },
+
+    addPic: async (req, res) => {
+        const {profile_pic} = req.body
+        const db = req.app.get('db')
+        await db.user.add_profile_pic([profile_pic, req.session.user.id])
+        return res.status(201).send('Profile picture updated!')
     }
 }
