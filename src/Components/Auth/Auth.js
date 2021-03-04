@@ -2,13 +2,25 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
-import updateUser from '../../redux/reducer'
+import {updateUser} from '../../redux/reducer'
 // import { login } from '../../../server/controllers/user'
 
 function Auth(props) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+
+function register(){
+    const userData = {username, password}
+    axios.post('/api/auth/register', userData)
+    .then(res => {
+        props.history.push('/posts')
+        props.updateUser({username: res.data.username, profile_pic: res.data.profile_pic, id: res.data.id})
+    }).catch(err => {
+        console.log(err)
+    })
+
+}
     
 function login() {
     const userData = {username, password}
@@ -22,6 +34,11 @@ function login() {
         })
 }
 
+// function logoutUser() {
+//     axios.post('/api/auth/logout')
+//       .then(_ => logout, props.history.push('/'))
+//   }
+
 
 return (
     <div>
@@ -34,6 +51,8 @@ return (
         type='password' placeholder='password' />
 
         <button onClick={login}>Login</button>
+        <button onClick={register}>Register</button>
+        
     </div>
 )
 }
