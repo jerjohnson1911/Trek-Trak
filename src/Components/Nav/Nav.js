@@ -26,6 +26,7 @@ function logoutUser() {
 
 
 return(
+    props.location.pathname !== '/' &&
     <div>
 <Link to='/posts'>
 <button>Posts</button>
