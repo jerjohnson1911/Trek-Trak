@@ -4,6 +4,7 @@ const massive = require('massive')
 
 const express = require('express')
 const userCtrl = require('./controllers/user')
+const postCtrl = require('./controllers/posts')
 
 let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 
@@ -36,6 +37,9 @@ app.post('/api/auth/login', userCtrl.login)
 app.get('/api/auth/me', userCtrl.getUser)
 app.post('/api/auth/logout', userCtrl.logout)
 app.post('/api/auth/addPic', userCtrl.addPic) 
+
+//POST ENDPOINTS!!
+app.post('/api/post', postCtrl.createPost)
 
 
 app.listen(SERVER_PORT, () => {

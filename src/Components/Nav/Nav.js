@@ -13,6 +13,7 @@ useEffect(() => {
     
 }, [props])
 
+//useeffect can have the functionality built in and can utilize use effect unlimited times.
 // function getUser(){
 //     axios.get('/api/auth/me')
 //     .then(res => props.updateUser(res.data))
