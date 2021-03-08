@@ -1,5 +1,11 @@
 module.exports = {
-
+    readPosts: async (req, res) => {
+        let {id} = req.session.user
+        const db = await req.app.get('db')
+        db.posts.read_my_posts([id])
+        .then(posts => res.status(200).send(posts))
+        
+    },
 
     createPost: async (req, res) => {
         const db = req.app.get('db')

@@ -40,6 +40,7 @@ app.post('/api/auth/addPic', userCtrl.addPic)
 
 //POST ENDPOINTS!!
 app.post('/api/post', postCtrl.createPost)
+app.get('/api/posts', postCtrl.readPosts)
 
 
 app.listen(SERVER_PORT, () => {
