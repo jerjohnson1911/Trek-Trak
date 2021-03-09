@@ -16,5 +16,10 @@ module.exports = {
             await db.posts.create_post([title, content, img, id, date])
             res.status(200).send('Post created!')
         }
-    }
+    },
+
+    deletePost: (req, res) => {
+        req.app.get('db').posts.delete_post(req.params.id)
+          .then(_ => res.sendStatus(200))
+      }
 }

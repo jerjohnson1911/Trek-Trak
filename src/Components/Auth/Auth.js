@@ -1,9 +1,8 @@
-// const { useState } = require("react");
 import React, { useState } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import {updateUser} from '../../redux/reducer'
-// import { login } from '../../../server/controllers/user'
+
 
 function Auth(props) {
     const [username, setUsername] = useState('')

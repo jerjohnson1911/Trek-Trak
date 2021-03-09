@@ -8,22 +8,33 @@ function Posts() {
 const [posts, setPosts] = useState([])
 
 
-useEffect( async () => {
-    const res = await axios.get('/api/posts')
-    setPosts(res.data)
-}, [])
+// useEffect( async () => {
+//     const res = await axios.get('/api/posts')
+//     setPosts(res.data)
+// }, [])
 
+useEffect(() => {
+    const fetchData = async () => {
+       const res = await axios.get('/api/posts')
+       setPosts(res.data)
+    }
+    fetchData()
+}, [posts])
     
-
+function deletePost() {
+    axios.delete(`/api/post/${posts.id}`)
+    // .then(setPosts())
+}
 
     return (
         <div>
-            <h1>Test 1 2</h1>
+            <h1>Here are your posts!</h1>
             <ul>
             {posts.map(item => (
                 <li key={item.id}>
-                    <p>{item.title}</p> 
+                    <p>{item.title}</p>
                     <p>{item.content}</p>
+                    <button onClick={deletePost()}>x</button>
                 </li>
             ))}
                 

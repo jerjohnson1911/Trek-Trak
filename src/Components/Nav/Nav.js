@@ -32,7 +32,9 @@ return(
 <Link to='/posts'>
 <button>Posts</button>
 </Link>
-
+<Link to='/new'>
+    <button>New Post</button>
+</Link>
 
 <Link to='/' onClick={logoutUser}>
 <button>Logout</button>
