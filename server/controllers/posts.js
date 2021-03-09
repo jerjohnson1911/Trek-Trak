@@ -7,6 +7,13 @@ module.exports = {
         
     },
 
+    readPost: (req, res) => {
+        // console.log('hit readPost')
+        req.app.get('db').posts.read_one_post(req.params.id)
+        .then(post => post[0] ? res.status(200).send(post[0]) : res.status(200).send({}))
+
+    },
+
     createPost: async (req, res) => {
         const db = req.app.get('db')
         const { id } = req.session.user

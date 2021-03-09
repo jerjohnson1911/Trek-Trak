@@ -1,0 +1,1 @@
+SELECT * FROM trek_posts WHERE id = $1;

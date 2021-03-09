@@ -3,7 +3,7 @@ import axios from 'axios'
 // import {connect} from 'react-redux'
 // import {updateUser} from '../../redux/reducer'
 
-function New(asdf) {
+function New(props) {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
     const [img, setImg] = useState('')
@@ -13,8 +13,8 @@ function New(asdf) {
         const postData = { title, content, img }
         axios.post('/api/post', postData)
             .then(() => {
-                console.log(asdf)
-                asdf.history.push('/posts')
+                console.log(props)
+                props.history.push('/posts')
 
             })
             .catch((err) => console.log(err))
