@@ -8,10 +8,6 @@ function Posts() {
 const [posts, setPosts] = useState([])
 
 
-// useEffect( async () => {
-//     const res = await axios.get('/api/posts')
-//     setPosts(res.data)
-// }, [])
 
 useEffect(() => {
     const fetchData = async () => {
@@ -21,9 +17,9 @@ useEffect(() => {
     fetchData()
 }, [posts])
     
-function deletePost() {
-    axios.delete(`/api/post/${posts.id}`)
-    // .then(setPosts())
+function deletePost(id) {
+    axios.delete(`/api/post/${id}`)
+    
 }
 
     return (
@@ -34,7 +30,7 @@ function deletePost() {
                 <li key={item.id}>
                     <p>{item.title}</p>
                     <p>{item.content}</p>
-                    <button onClick={deletePost()}>x</button>
+                    <button onClick={() => deletePost(item.id)}>x</button>
                 </li>
             ))}
                 
