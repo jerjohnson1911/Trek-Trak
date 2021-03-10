@@ -39,6 +39,11 @@ return(
 <Link to='/' onClick={logoutUser}>
 <button>Logout</button>
 </Link>
+
+<Link to='/map'>
+<button>Map</button>
+</Link>
+
 </div>
 )
 }

@@ -14,6 +14,7 @@ export function updateUser(user) {
         payload: user
     }
 }
+console.log(updateUser)
 
 
 export function logout(){
