@@ -43,6 +43,7 @@ app.post('/api/post', postCtrl.createPost)
 app.get('/api/posts', postCtrl.readPosts)
 app.get('/api/post/:id', postCtrl.readPost)
 app.delete('/api/post/:id', postCtrl.deletePost)
+app.get('/api/allCoordinates', postCtrl.readAllCoordinates)
 
 
 app.listen(SERVER_PORT, () => {

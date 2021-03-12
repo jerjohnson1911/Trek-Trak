@@ -1,0 +1,1 @@
+SELECT id, latitude, longitude FROM trek_posts WHERE author_id = $1;
