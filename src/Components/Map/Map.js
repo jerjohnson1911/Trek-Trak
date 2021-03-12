@@ -57,7 +57,7 @@ return(
             {markers.map((marker) => (
             <Marker 
             key={marker.id}
-            position={{lat: marker.latitude, lng: marker.longitude}} 
+            position={{lat: +marker.latitude, lng: +marker.longitude}} 
             />
             ))}
         </GoogleMap>
