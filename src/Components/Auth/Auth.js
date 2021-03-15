@@ -7,7 +7,7 @@ import {updateUser} from '../../redux/reducer'
 function Auth(props) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-
+    const [error, setError] = useState('')
 
 function register(){
     const userData = {username, password}
@@ -16,6 +16,7 @@ function register(){
         props.history.push('/posts')
         props.updateUser({username: res.data.username, profile_pic: res.data.profile_pic, id: res.data.id})
     }).catch(err => {
+        setError('Username is taken!')
         console.log(err)
     })
 
@@ -29,18 +30,23 @@ function login() {
         props.updateUser({username: res.data.username, profile_pic: res.data.profile_pic, id: res.data.id})
     })
     .catch(err => {
+        setError('Wrong Username or Password!')
         console.log(err)
         })
 }
 
-// function logoutUser() {
-//     axios.post('/api/auth/logout')
-//       .then(_ => logout, props.history.push('/'))
-//   }
+function closeErrorMessage() {
+    setError(!error)
+    setUsername('')
+    setPassword('')
+}
 
 
 return (
     <div>
+          {error && <h3>{error} <span onClick={closeErrorMessage}>X</span></h3>}
+
+
         <input value={username} 
         onChange={e => setUsername(e.target.value)} 
         type='text' placeholder='username' />
