@@ -6,7 +6,7 @@ password VARCHAR(2500) NOT NULL,
 first_name VARCHAR (45),
 last_name VARCHAR(45),
 profile_pic TEXT,
-date_created TIMESTAMP
+date_created TIMESTAMP,
 )
 ;
 
@@ -17,6 +17,8 @@ title VARCHAR(45) NOT NULL,
 content TEXT,
 img TEXT,
 author_id INTEGER REFERENCES trek_users(id),
-date_created TIMESTAMP
+date_created TIMESTAMP,
+latitude DECIMAL,
+longitude DECIMAL
 )
 ;

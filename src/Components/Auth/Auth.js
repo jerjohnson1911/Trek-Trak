@@ -2,6 +2,65 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import {updateUser} from '../../redux/reducer'
+import {css} from '@emotion/react'
+import styled from '@emotion/styled'
+
+const Container = styled.div`
+background-color: #283618;
+height: 100vh;
+width: 100vw;
+display: flex;
+flex-direction: column;
+align-items: center;
+`
+const InputContainer = styled.div`
+display: flex;
+flex-direction: row;
+width: 650px;
+justify-content: space-between;
+`
+
+const ButtonContainer = styled.div`
+display: flex;
+flex-direction: row;
+width: 650px;
+justify-content: space-between;
+    &  > button{
+        background-color: transparent;
+        width:200px;
+        height:30px;
+        border: transparent;
+        color: #FEFAE0;
+        /* box-shadow: 0px 0px 15px 5px rgba(254,250,224,0.39); */
+        box-shadow: 0px 0px 0px 3px rgba(254,250,224,0.28);
+        text-transform: uppercase
+    }
+`
+
+const Header = styled.h1`
+font-size: 50px;
+font-weight: 700;
+color: #FEFAE0;
+margin-bottom: 200px;
+`
+
+const Input = styled.input`
+border: 0;
+border-bottom: 2px solid gray;
+outline: 0;
+font-size: 1.3rem;
+color: #FEFAE0;
+padding: 7px 0;
+background: transparent;
+margin-bottom: 20px;
+width: 300px;
+
+
+    & > ::placeholder{
+    color: #283618;
+
+}
+`
 
 
 function Auth(props) {
@@ -42,23 +101,29 @@ function closeErrorMessage() {
 }
 
 
+
 return (
-    <div>
+    <Container>
+        <Header>TREK-TRAK</Header>
+
           {error && <h3>{error} <span onClick={closeErrorMessage}>X</span></h3>}
 
-
-        <input value={username} 
+    <InputContainer>
+        <Input value={username} 
         onChange={e => setUsername(e.target.value)} 
         type='text' placeholder='username' />
 
-        <input value={password} 
+        <Input value={password} 
         onChange={e => setPassword(e.target.value)} 
         type='password' placeholder='password' />
+    </InputContainer>
 
+        <ButtonContainer>
         <button onClick={login}>Login</button>
         <button onClick={register}>Register</button>
+        </ButtonContainer>
         
-    </div>
+    </Container>
 )
 }
 
