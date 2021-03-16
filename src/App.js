@@ -1,11 +1,12 @@
 import React from 'react'
-import './App.css';
+import './reset.css';
 import Nav from './Components/Nav/Nav'
+import './Components/Nav/Nav.css'
 import routes from './routes'
 import styled from '@emotion/styled'
 
 const Body = styled.div`
-background-color: #606C38
+background-color: #283618;
 `
 
 function App() {

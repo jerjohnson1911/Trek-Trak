@@ -1,13 +1,96 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import '../Nav/Nav.css'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import styled from '@emotion/styled'
 import {
     GoogleMap,
     useLoadScript,
     Marker,
     InfoWindow
 } from '@react-google-maps/api'
+
+
+const Container = styled.div`
+background-color: #283618;
+display: flex;
+flex-direction: column;
+width: 99vw;
+height: 100vh;
+justify-content: flex-start;
+align-items: center;
+    & > h1{
+        color: #FEFAE0;
+        font-size: 40px;
+        text-transform: uppercase;
+        margin-top: 50px;
+        margin-bottom: 50px
+    }
+    & > ul{
+        background-color: #283618;
+        display: flex;
+        flex-wrap: wrap;
+        width:99vw;
+        height: 100vh;
+
+        & > li{
+            background-color: #283618;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width:50%;
+            margin-bottom: 50px;
+            & > a{
+                color: #DDA15E;
+                font-size: 20px;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-weight: 700;
+                border-bottom: #FEFAE0 solid 2px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+    @media(max-width: 768px){
+        height: 325vh;
+        width: 99vw;
+        
+        & > ul{
+        background-color: #283618;
+        display: flex;
+        flex-direction: column;
+        flex-wrap:nowrap;
+        width:99vw;
+        height: 100vh;
+        & > li{
+            padding-left: 20px;
+            background-color: #283618;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width:80vw;
+            margin-bottom: 50px;
+            & > a{
+                color: #DDA15E;
+                font-size: 30px;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-weight: 700;
+                border-bottom: #FEFAE0 solid 2px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+`
+// const UL = styled.ul`
+//         background-color: #283618;
+//         display: flex;
+//         flex-wrap: wrap;
+//         width:99vw;
+//         height: 100vh;
+// `
 
 function Posts() {
     const [posts, setPosts] = useState([])
@@ -28,8 +111,8 @@ function Posts() {
 
     const libraries = ['places']
     const mapContainerStyle = {
-        width: '25vw',
-        height: '25vh'
+        width: '35vw',
+        height: '35vh'
     }
 
     
@@ -46,15 +129,15 @@ function Posts() {
     if (!isLoaded) return 'Loading maps!'
 
     return (
-        <div>
-            <h1>Here are your posts!</h1>
+        <Container>
+            <h1>most excellent treks</h1>
             <ul>
                 {posts.map(item => (
                     <li key={item.id}>
                         <Link to={`post/${item.id}`}>
-                            <p>{item.title}</p>
+                            <h2>{item.title}</h2>
                         </Link>
-                        <p>{item.content}</p>
+                        {/* <p>{item.content}</p> */}
                         <GoogleMap
                             mapContainerStyle={mapContainerStyle}
                             zoom={15}
@@ -74,7 +157,7 @@ function Posts() {
                 ))}
 
             </ul>
-        </div>
+        </Container>
     )
 }
 

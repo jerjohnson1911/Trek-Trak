@@ -2,11 +2,12 @@ import React, { useCallback, useState } from 'react'
 import axios from 'axios'
 // import {connect} from 'react-redux'
 // import {updateUser} from '../../redux/reducer'
+import styled from '@emotion/styled'
 import {
     GoogleMap,
     useLoadScript,
     Marker,
-    InfoWindow
+    // InfoWindow
 } from '@react-google-maps/api'
 import usePlacesAutocomplete, {
     getGeocode,
@@ -23,11 +24,72 @@ import {
 const libraries = ['places']
 const mapContainerStyle = {
     width: '50vw',
-    height: '50vh'
+    height: '100vh'
 }
 const options = {
     // styles: mapStyles,
 }
+
+const Container = styled.div`
+background-color: #283618;
+width: 99vw;
+height: 100vh;
+display: flex;
+`
+const FormContainer = styled.div`
+display: flex;
+flex-direction: column;
+position: absolute;
+top: 100px;
+right:300px;
+    & > input{
+        border: 0;
+        border-bottom: 2px solid gray;
+        outline: 0;
+        font-size: 1.3rem;
+        color: #FEFAE0;
+        padding: 7px 0;
+        background: transparent;
+        margin-bottom: 20px;
+        width: 300px;
+        transition-duration: .25s;
+        margin-top: 20px;
+        
+}
+
+&  > button{
+        background-color: transparent;
+        width:200px;
+        height:30px;
+        border: transparent;
+        color: #FEFAE0;
+        /* box-shadow: 0px 0px 15px 5px rgba(254,250,224,0.39); */
+        box-shadow: 0px 0px 0px 3px rgba(254,250,224,0.28);
+        text-transform: uppercase;
+        transition-duration: .25s;
+      }  
+    & > button:hover{
+        transform: translate(0, -4px);
+        box-shadow: 0px 0px 0px 3px rgba(254,250,224,1);
+    }
+`
+const ContentInput = styled.textarea`
+height: 250px;
+width: 300px;
+border: 2px solid gray;
+background: transparent;
+color: #FEFAE0;
+
+`
+
+const SearchContainer = styled.div`
+    display: flex;
+    position: absolute;
+    top: 20px;
+    left: 300px;
+    width: 250px;
+    justify-content: space-between;
+`
 
 function New(props) {
     const [title, setTitle] = useState('')
@@ -83,49 +145,59 @@ function New(props) {
     }
 
     return (
-        <div>
-            <input value={title}
-                onChange={e => setTitle(e.target.value)}
-                placeholder='Title' type='text' />
+        <Container>
+            <div>
+                <GoogleMap
+                    mapContainerStyle={mapContainerStyle}
+                    zoom={15}
+                    center={center}
+                    options={options}
+                    onClick={onMapClick}
+                    onLoad={onMapLoad}
 
-            <input value={content}
-                onChange={e => setContent(e.target.value)}
-                placeholder='Content' type='text' />
+                >
 
-            <input value={img}
-                onChange={e => setImg(e.target.value)}
-                placeholder='Img' type='text' />
+                    <Marker
+                        position={{ lat: +coor.lat, lng: +coor.lng }}
+                    />
 
-            <input value={lat}
-                onChange={e => setLat(e.target.value)}
-                placeholder='Enter Latitude' type='number' />
+                </GoogleMap>
+            </div>
+            <FormContainer>
+                <input value={title}
+                    onChange={e => setTitle(e.target.value)}
+                    placeholder='Title' type='text' />
 
-            <input value={lng}
-                onChange={e => setLng(e.target.value)}
-                placeholder='Enter Longitude' type='number' />
+                <ContentInput value={content}
+                    onChange={e => setContent(e.target.value)}
+                    placeholder='Content' type='text' />
 
-            <button onClick={submit}>Submit</button>
+                {/* <input value={img}
+                    onChange={e => setImg(e.target.value)}
+                    placeholder='Img' type='text' /> */}
 
-            <Search panTo={panTo} />
-            <Locate panTo={panTo} />
+                <input value={lat}
+                    onChange={e => setLat(e.target.value)}
+                    placeholder='Enter Latitude' type='number' />
 
-            <GoogleMap
-                mapContainerStyle={mapContainerStyle}
-                zoom={15}
-                center={center}
-                options={options}
-                onClick={onMapClick}
-                onLoad={onMapLoad}
+                <input value={lng}
+                    onChange={e => setLng(e.target.value)}
+                    placeholder='Enter Longitude' type='number' />
 
-            >
+                <button onClick={submit}>Submit</button>
+            </FormContainer>
 
-                <Marker
-                    position={{ lat: +coor.lat, lng: +coor.lng }}
-                />
 
-            </GoogleMap>
 
-        </div>
+            <SearchContainer>
+                <Search panTo={panTo} />
+                <Locate panTo={panTo} />
+            </SearchContainer>
+
+
+
+
+        </Container>
 
     )
 }

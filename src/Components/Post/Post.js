@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import styled from '@emotion/styled'
 import {
     GoogleMap,
     useLoadScript,
@@ -11,12 +12,52 @@ import {
 const libraries = ['places']
 const mapContainerStyle = {
     width: '50vw',
-    height: '50vh'
+    height: '85vh'
 }
 const options = {
     // styles: mapStyles,
 }
 
+
+const Container = styled.div`
+height: 100vh;
+width: 90vw;
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+padding-top: 30px;
+
+    /* @media(max-width: 768px){
+        flex-direction: column;
+        justify-content: center;
+    } */
+`
+const InfoDiv = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+    & > h2{
+        font-size:40px;
+        color: #FEFAE0;
+    }
+    &  > p{
+        color: #FEFAE0;
+        margin-top: 50px;
+    }
+    @media(max-width: 768px){
+        width:300px;
+        position: absolute;
+        top: 200px;
+        right:30px;
+    }
+`
+
+const MapDiv = styled.div`
+@media(max-width: 768px){
+    position:absolute;
+    left:0;
+}
+`
 
 function Post() {
     // console.log('hit')
@@ -60,10 +101,8 @@ function Post() {
     if (!isLoaded) return 'Loading maps!'
 
     return (
-        <div>
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
-            <div>
+        <Container>
+            <MapDiv>
                 <GoogleMap
                     mapContainerStyle={mapContainerStyle}
                     zoom={15}
@@ -78,8 +117,13 @@ function Post() {
 
                 </GoogleMap>
 
-            </div>
-        </div>
+            </MapDiv>
+            <InfoDiv>
+                <h2>{post.title}</h2>
+                <p>{post.content}</p>
+                <p>Latitude:{post.latitude}  / Longitude:{post.longitude}</p>
+            </InfoDiv>
+        </Container>
     )
 
 }
