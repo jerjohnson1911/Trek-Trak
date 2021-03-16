@@ -1,7 +1,7 @@
 require('dotenv').config()
 const session = require('express-session')
 const massive = require('massive')
-
+const path = require('path')
 const express = require('express')
 const userCtrl = require('./controllers/user')
 const postCtrl = require('./controllers/posts')
@@ -12,6 +12,10 @@ const app = express()
 
 app.use(express.json())
 
+app.use(express.static(`${__dirname}/../build`))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'))
+  })
 
 massive({
     connectionString: CONNECTION_STRING,
